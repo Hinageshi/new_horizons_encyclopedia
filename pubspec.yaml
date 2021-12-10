@@ -1,0 +1,49 @@
+name: new_horizons_encyclopedia
+description: A new Flutter project.
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  appwrite: ^2.0.3
+  device_preview: ^1.0.0-alpha.15 # Remove after debug
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  freezed_annotation: ^0.15.0 # TODO: Set to 1.0.0 after DevicePreview removal
+  gap: ^2.0.0
+  json_annotation: ^4.3.0
+  quiver: ^3.0.1+1
+  provider: ^6.0.1
+  rect_getter: ^1.1.0
+
+dev_dependencies:
+  build_runner: ^2.1.5
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+  freezed: ^0.15.1+1 # TODO: Set to 1.0.0 after DevicePreview removal
+  json_serializable: ^6.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/background.jpg
+    - assets/images/bell.png
+    - assets/images/chrono.png
+    - assets/images/critterpedia.png
+    - assets/images/error.png
+    - assets/images/fishing_rod.png
+    - assets/images/net.png
+    - assets/images/ruler.png
+    - assets/images/seashell.png
+  fonts:
+    - family: FOT-Seurat-Pro
+      fonts:
+          - asset: assets/fonts/FOT-Seurat-Pro_B.otf
+          - asset: assets/fonts/FOT-Seurat-Pro_DB.otf
+            weight: 700

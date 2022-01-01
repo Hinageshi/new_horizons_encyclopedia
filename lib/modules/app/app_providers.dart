@@ -3,6 +3,7 @@ import 'package:new_horizons_encyclopedia/core/config/config.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/bugs.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/fish.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/sea_creatures.dart';
+import 'package:new_horizons_encyclopedia/data/sources/appwrite_account.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_client.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_database.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
@@ -45,6 +46,12 @@ class AppProviders extends StatelessWidget {
         ),
         ProxyProvider0<AppwriteStorage>(
           update: (context, old) => AppwriteStorage.update(
+            client: context.watch<AppwriteClient>(),
+            old: old,
+          ),
+        ),
+        ProxyProvider0<AppwriteAccount>(
+          update: (context, old) => AppwriteAccount.update(
             client: context.watch<AppwriteClient>(),
             old: old,
           ),

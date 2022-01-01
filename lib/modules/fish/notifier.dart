@@ -79,42 +79,32 @@ class FishNotifier extends SafeChangeNotifier
           ? DateTime.now().month
           : _databaseFilters.month!;
 
-      print('$targetMonth');
       fish.removeWhere((element) {
-        print('${element.name} ${element.month}');
         bool monthOk = true;
 
         if (element.month == '1-12') {
-          print('1');
           return false;
         }
         if ((element.month.length == 1 || element.month.length == 2) &&
             int.parse(element.month) == targetMonth) {
-          print('2');
           return false;
         }
         if (element.month.contains(';')) {
-          print('3');
           element.month.split(';').forEach((e1) {
             if ((e1.length == 1 || e1.length == 2) &&
                 int.parse(e1) == targetMonth) {
-              print('4');
               monthOk = false;
             } else {
               int monthStart = int.parse(e1.split('-')[0]);
               int monthEnd = int.parse(e1.split('-')[1]);
-              print('5 $monthStart $monthEnd');
               if (monthStart > monthEnd) {
                 int tmp = monthStart;
                 monthStart = monthEnd;
                 monthEnd = tmp;
-                print('6 $monthStart $monthEnd');
                 if (targetMonth <= monthStart || targetMonth >= monthEnd) {
-                  print('7');
                   monthOk = false;
                 }
               } else if (targetMonth >= monthStart && targetMonth <= monthEnd) {
-                print('8');
                 monthOk = false;
               }
             }
@@ -122,23 +112,18 @@ class FishNotifier extends SafeChangeNotifier
         } else if (element.month.contains('-')) {
           int monthStart = int.parse(element.month.split('-')[0]);
           int monthEnd = int.parse(element.month.split('-')[1]);
-          print('9 $monthStart $monthEnd');
           if (monthStart > monthEnd) {
             int tmp = monthStart;
             monthStart = monthEnd;
             monthEnd = tmp;
-            print('10 $monthStart $monthEnd');
             if (targetMonth <= monthStart || targetMonth >= monthEnd) {
-              print('11');
               monthOk = false;
             }
           } else if (targetMonth >= monthStart && targetMonth <= monthEnd) {
-            print('12');
             monthOk = false;
           }
         }
 
-        print('13 $monthOk');
         return monthOk;
       });
 

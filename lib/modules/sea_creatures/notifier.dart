@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:new_horizons_encyclopedia/core/notifiers/busy_notifier.dart';
 import 'package:new_horizons_encyclopedia/core/notifiers/error_notifier.dart';
 import 'package:new_horizons_encyclopedia/core/notifiers/loadable_notifier.dart';
@@ -67,7 +66,6 @@ class SeaCreaturesNotifier extends SafeChangeNotifier
     );
 
     if (databaseFilters != null && _databaseFilters != databaseFilters) {
-      print('Filters are different !');
       _databaseFilters = databaseFilters;
       load();
     }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_card.dart';
 import 'package:new_horizons_encyclopedia/modules/bugs/view.dart';
 import 'package:new_horizons_encyclopedia/modules/fish/view.dart';

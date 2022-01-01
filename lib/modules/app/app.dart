@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:new_horizons_encyclopedia/core/config/config.dart';
 import 'package:new_horizons_encyclopedia/modules/app/app_providers.dart';

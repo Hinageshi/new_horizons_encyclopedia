@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_card.dart';
 import 'package:new_horizons_encyclopedia/data/entities/database_filters.dart';

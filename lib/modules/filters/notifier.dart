@@ -7,15 +7,13 @@ import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 
 class FiltersNotifier extends SafeChangeNotifier {
   FiltersNotifier(
-    this._databaseFilters,
-  )   : _orderType = _databaseFilters.orderType,
-        _orderCast = _databaseFilters.orderCast,
-        _orderSort = _databaseFilters.orderSort,
-        _filterTime = _databaseFilters.filterTime,
-        _month = _databaseFilters.month ?? DateTime.now().month,
-        _filterRarity = _databaseFilters.filterRarity;
-
-  final DatabaseFilters _databaseFilters;
+    DatabaseFilters databaseFilters,
+  )   : _orderType = databaseFilters.orderType,
+        _orderCast = databaseFilters.orderCast,
+        _orderSort = databaseFilters.orderSort,
+        _filterTime = databaseFilters.filterTime,
+        _month = databaseFilters.month ?? DateTime.now().month,
+        _filterRarity = databaseFilters.filterRarity;
 
   OrderType get orderType => _orderType;
   OrderType _orderType;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:new_horizons_encyclopedia/modules/app/app_keys.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 import 'package:new_horizons_encyclopedia/theme/app_text_styles.dart';

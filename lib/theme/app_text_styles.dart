@@ -30,6 +30,24 @@ class AppTextStyles {
     color: AppColors.white,
     fontSize: 10,
   );
+
+  static const TextStyle inputLabel = _AppTextStyle(
+    fontFamily: 'FOT-Seurat-Pro',
+    color: AppColors.text,
+    fontSize: 14,
+  );
+
+  static const TextStyle buttonText = _AppTextStyle(
+    fontFamily: 'FOT-Seurat-Pro',
+    color: AppColors.surface,
+    fontSize: 14,
+  );
+
+  static const TextStyle link = _AppTextStyle(
+    fontFamily: 'FOT-Seurat-Pro',
+    color: AppColors.primary,
+    fontSize: 14,
+  );
 }
 
 class _AppTextStyle extends TextStyle {

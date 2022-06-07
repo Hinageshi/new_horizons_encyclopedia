@@ -6,16 +6,20 @@ import 'package:new_horizons_encyclopedia/core/widgets/app_card.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_circle_image.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_list.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_price_line.dart';
+import 'package:new_horizons_encyclopedia/core/widgets/app_tile.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_time_line.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_top_bar.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/notifier_loader.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/observers/busy_observer.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/observers/error_observer.dart';
 import 'package:new_horizons_encyclopedia/data/entities/fish_size.dart';
+import 'package:new_horizons_encyclopedia/data/entities/rarity.dart';
 import 'package:new_horizons_encyclopedia/data/entities/movement.dart';
 import 'package:new_horizons_encyclopedia/data/entities/sea_creature.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/sea_creatures.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
+import 'package:new_horizons_encyclopedia/extensions/hour_month_extensions.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
 import 'package:new_horizons_encyclopedia/modules/sea_creatures/notifier.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 import 'package:new_horizons_encyclopedia/theme/app_images.dart';
@@ -54,6 +58,7 @@ class _InternalSeaCreaturesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final notifier = context.watch<SeaCreaturesNotifier>();
 
     return Stack(
@@ -61,21 +66,23 @@ class _InternalSeaCreaturesView extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AppImages.background),
+              image: AssetImage(AppImages.backgroundYellow),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        Column(
-          children: [
-            AppTopBar(
-              title: 'Créatures marines',
-              onTap: () => notifier.pushFiltersViewAndReload(context),
-            ),
-            const Expanded(
-              child: _SeaCreaturesList(),
-            ),
-          ],
+        SafeArea(
+          child: Column(
+            children: [
+              AppTopBar(
+                title: l10n.common_sea_creatures,
+                onTap: () => notifier.pushFiltersViewAndReload(context),
+              ),
+              const Expanded(
+                child: _SeaCreaturesList(),
+              ),
+            ],
+          ),
         )
       ],
     );
@@ -123,6 +130,8 @@ class _SeaCreatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: AppCard(
@@ -141,15 +150,34 @@ class _SeaCreatureCard extends StatelessWidget {
                       const Gap(12),
                       Text(
                         seaCreature.name,
-                        style: AppTextStyles.cardTitle,
+                        style: AppTextStyles.cardTitle.copyWith(height: 1.5),
                         textAlign: TextAlign.center,
                       ),
+                      if (seaCreature.rarity != Rarity.normal) ...[
+                        const Gap(6),
+                        AppTile(
+                          color: seaCreature.rarity == Rarity.rare
+                              ? AppColors.yellow
+                              : AppColors.orange,
+                          text: seaCreature.rarity.toShortString(context),
+                        ),
+                      ],
+                      if (seaCreature.month.isSameFirstMonth())
+                        AppTile(
+                          color: AppColors.green,
+                          text: l10n.tile_new_month,
+                        ),
+                      if (seaCreature.month.isSameLastMonth())
+                        AppTile(
+                          color: AppColors.red,
+                          text: l10n.tile_last_month,
+                        ),
                     ],
                   ),
                 ),
-                const VerticalDivider(
+                VerticalDivider(
                   width: 24,
-                  color: AppColors.text,
+                  color: AppColors.text.withOpacity(0.3),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +219,7 @@ class _SeaCreatureSizeLine extends StatelessWidget {
         ),
         const Gap(12),
         Text(
-          size.toShortString(),
+          size.toShortString(context),
           style: AppTextStyles.cardBody,
         )
       ],
@@ -217,7 +245,7 @@ class _SeaCreatureMovementLine extends StatelessWidget {
         ),
         const Gap(12),
         Text(
-          movement.toShortString(),
+          movement.toShortString(context),
           style: AppTextStyles.cardBody,
         )
       ],

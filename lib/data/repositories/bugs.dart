@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:new_horizons_encyclopedia/data/entities/bug.dart';
 import 'package:new_horizons_encyclopedia/data/entities/database_filters.dart';
+import 'package:new_horizons_encyclopedia/data/entities/filter_rarity.dart';
+import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_database.dart';
 import 'package:quiver/cache.dart';
 
-const _collectionId = '6192cb069f7b0';
+const _collectionId = 'bugs';
 
 @immutable
 class BugsRepository {
@@ -34,7 +36,7 @@ class BugsRepository {
     required DatabaseFilters databaseFilters,
   }) async =>
       await _cache.get(
-        'bugs',
+        'bugs_${databaseFilters.orderType.toDatabaseField()}_${databaseFilters.orderSort.toDatabaseSort()}_${databaseFilters.filterRarity.toDatabaseFilter()}',
         ifAbsent: (key) async => _database.fetchDocuments<Bug>(
           collectionId: _collectionId,
           deserializer: (json) => Bug.fromJson(json as Map<String, dynamic>),

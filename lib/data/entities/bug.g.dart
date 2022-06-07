@@ -11,7 +11,7 @@ _$_Bug _$$_BugFromJson(Map<String, dynamic> json) => _$_Bug(
       name: json['name'] as String,
       hour: json['hour'] as String,
       month: json['month'] as String,
-      price: json['price'] as String,
+      price: json['price'] as int,
       location: $enumDecode(_$BugLocationEnumMap, json['location']),
       rarity: $enumDecode(_$RarityEnumMap, json['rarity']),
       imageId: json['imageId'] as String,

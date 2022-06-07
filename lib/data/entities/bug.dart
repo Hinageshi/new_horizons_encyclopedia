@@ -12,7 +12,7 @@ class Bug with _$Bug {
     required String name,
     required String hour,
     required String month,
-    required String price,
+    required int price,
     required BugLocation location,
     required Rarity rarity,
     required String imageId,

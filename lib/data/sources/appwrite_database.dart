@@ -39,14 +39,16 @@ class AppwriteDatabase {
     final documents = await _database
         .listDocuments(
           collectionId: collectionId,
-          filters: [
+          queries: [
             if (databaseFilters.filterRarity != FilterRarity.all)
-              'rarity=${databaseFilters.filterRarity.toDatabaseFilter()}',
+              Query.equal(
+                'rarity',
+                databaseFilters.filterRarity.toDatabaseFilter(),
+              ),
           ],
           limit: limit,
-          orderField: databaseFilters.orderType.toDatabaseField(),
-          orderType: databaseFilters.orderSort.toDatabaseSort(),
-          orderCast: databaseFilters.orderCast.toDatabaseCast(),
+          orderAttributes: [databaseFilters.orderType.toDatabaseField()],
+          orderTypes: [databaseFilters.orderSort.toDatabaseSort()],
         )
         .then((list) => list.documents);
     return documents.map((document) => deserializer(document.data)).toList();

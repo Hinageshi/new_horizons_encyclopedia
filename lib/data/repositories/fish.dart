@@ -6,7 +6,7 @@ import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_database.dart';
 import 'package:quiver/cache.dart';
 
-const _collectionId = '6192cafdc55a8';
+const _collectionId = 'fish';
 
 @immutable
 class FishRepository {

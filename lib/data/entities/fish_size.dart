@@ -1,5 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:flutter/widgets.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
+
 enum FishSize {
   tiny,
   small,
@@ -15,30 +18,32 @@ enum FishSize {
 }
 
 extension FishSizeExtension on FishSize {
-  String toShortString() {
+  String toShortString(BuildContext context) {
+    final l10n = context.l10n;
+
     switch (this) {
       case FishSize.tiny:
-        return 'Minuscule';
+        return l10n.fish_size_tiny;
       case FishSize.small:
-        return 'Petite';
+        return l10n.fish_size_small;
       case FishSize.small_average:
-        return 'Petite/Moyenne';
+        return l10n.fish_size_small_average;
       case FishSize.medium:
-        return 'Moyenne';
+        return l10n.fish_size_medium;
       case FishSize.medium_fin:
-        return 'Moyenne (aileron)';
+        return l10n.fish_size_medium_fin;
       case FishSize.medium_large:
-        return 'Moyenne/Grande';
+        return l10n.fish_size_medium_large;
       case FishSize.large:
-        return 'Grande';
+        return l10n.fish_size_large;
       case FishSize.very_large:
-        return 'Très grande';
+        return l10n.fish_size_very_large;
       case FishSize.huge:
-        return 'Énorme';
+        return l10n.fish_size_huge;
       case FishSize.huge_fin:
-        return 'Énorme (aileron)';
+        return l10n.fish_size_huge_fin;
       case FishSize.thin:
-        return 'Fine';
+        return l10n.fish_size_thin;
     }
   }
 }

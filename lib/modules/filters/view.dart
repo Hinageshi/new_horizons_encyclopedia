@@ -6,9 +6,9 @@ import 'package:new_horizons_encyclopedia/data/entities/filter_time.dart';
 import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 import 'package:new_horizons_encyclopedia/data/entities/filter_rarity.dart';
 import 'package:new_horizons_encyclopedia/extensions/hour_month_extensions.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
 import 'package:new_horizons_encyclopedia/modules/filters/notifier.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
-import 'package:new_horizons_encyclopedia/theme/app_images.dart';
 import 'package:new_horizons_encyclopedia/theme/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
@@ -16,16 +16,20 @@ class FiltersView extends StatelessWidget {
   const FiltersView({
     Key? key,
     required this.databaseFilters,
+    required this.backgroundPath,
   }) : super(key: key);
 
   final DatabaseFilters databaseFilters;
+  final String backgroundPath;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FiltersNotifier>(
       create: (_) => FiltersNotifier(databaseFilters),
-      child: const Scaffold(
-        body: _InternalFiltersView(),
+      child: Scaffold(
+        body: _InternalFiltersView(
+          backgroundPath: backgroundPath,
+        ),
       ),
     );
   }
@@ -34,16 +38,19 @@ class FiltersView extends StatelessWidget {
 class _InternalFiltersView extends StatelessWidget {
   const _InternalFiltersView({
     Key? key,
+    required this.backgroundPath,
   }) : super(key: key);
+
+  final String backgroundPath;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AppImages.background),
+              image: AssetImage(backgroundPath),
               fit: BoxFit.cover,
             ),
           ),
@@ -188,7 +195,9 @@ class _OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final notifier = context.watch<FiltersNotifier>();
+
     final orderType = context.select(
       (FiltersNotifier notifier) => notifier.orderType,
     );
@@ -204,12 +213,12 @@ class _OrderCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Tri',
+              Text(
+                l10n.sorting,
                 style: AppTextStyles.cardTitle,
               ),
               _DropdownRow<OrderType>(
-                orderTitle: 'Trier par : ',
+                orderTitle: l10n.sort_by,
                 value: orderType,
                 onChanged: (OrderType? newValue) {
                   if (newValue != null) {
@@ -222,14 +231,14 @@ class _OrderCard extends StatelessWidget {
                     value: value,
                     child: Center(
                       child: Text(
-                        value.toShortString(),
+                        value.toShortString(context),
                       ),
                     ),
                   );
                 }).toList(),
               ),
               _DropdownRow<OrderSort>(
-                orderTitle: 'Ordre : ',
+                orderTitle: l10n.sort_order,
                 value: orderSort,
                 onChanged: (OrderSort? newValue) {
                   if (newValue != null) {
@@ -242,7 +251,7 @@ class _OrderCard extends StatelessWidget {
                     value: value,
                     child: Center(
                       child: Text(
-                        value.toShortString(),
+                        value.toShortString(context),
                       ),
                     ),
                   );
@@ -263,7 +272,9 @@ class _FiltersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final notifier = context.watch<FiltersNotifier>();
+
     final filterTime = context.select(
       (FiltersNotifier notifier) => notifier.filterTime,
     );
@@ -282,12 +293,12 @@ class _FiltersCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Filtres',
+              Text(
+                l10n.filters,
                 style: AppTextStyles.cardTitle,
               ),
               _DropdownRow<FilterTime>(
-                orderTitle: 'Temps : ',
+                orderTitle: l10n.filters_time,
                 value: filterTime,
                 onChanged: (FilterTime? newValue) {
                   if (newValue != null) {
@@ -300,7 +311,7 @@ class _FiltersCard extends StatelessWidget {
                     value: value,
                     child: Center(
                       child: Text(
-                        value.toShortString(),
+                        value.toShortString(context),
                       ),
                     ),
                   );
@@ -308,7 +319,7 @@ class _FiltersCard extends StatelessWidget {
               ),
               if (filterTime == FilterTime.monthly)
                 _DropdownRow<int>(
-                  orderTitle: 'Mois : ',
+                  orderTitle: l10n.filters_month,
                   value: month,
                   onChanged: (int? newValue) {
                     if (newValue != null) {
@@ -321,14 +332,14 @@ class _FiltersCard extends StatelessWidget {
                       value: value,
                       child: Center(
                         child: Text(
-                          value.toString().toReadableMonth(),
+                          value.toString().toReadableMonth(context),
                         ),
                       ),
                     );
                   }).toList(),
                 ),
               _DropdownRow<FilterRarity>(
-                orderTitle: 'Rareté : ',
+                orderTitle: l10n.filters_rarity,
                 value: filterRarity,
                 onChanged: (FilterRarity? newValue) {
                   if (newValue != null) {
@@ -341,7 +352,7 @@ class _FiltersCard extends StatelessWidget {
                     value: value,
                     child: Center(
                       child: Text(
-                        value.toShortString(),
+                        value.toShortString(context),
                       ),
                     ),
                   );

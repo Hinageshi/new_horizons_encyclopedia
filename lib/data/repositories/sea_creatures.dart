@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:new_horizons_encyclopedia/data/entities/database_filters.dart';
+import 'package:new_horizons_encyclopedia/data/entities/filter_rarity.dart';
+import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 import 'package:new_horizons_encyclopedia/data/entities/sea_creature.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_database.dart';
 import 'package:quiver/cache.dart';
 
-const _collectionId = '61942735bce0c';
+const _collectionId = 'sea_creatures';
 
 @immutable
 class SeaCreaturesRepository {
@@ -34,7 +36,7 @@ class SeaCreaturesRepository {
     required DatabaseFilters databaseFilters,
   }) async =>
       await _cache.get(
-        'seaCreatures',
+        'seaCreatures_${databaseFilters.orderType.toDatabaseField()}_${databaseFilters.orderSort.toDatabaseSort()}_${databaseFilters.filterRarity.toDatabaseFilter()}',
         ifAbsent: (key) async => _database.fetchDocuments<SeaCreature>(
           collectionId: _collectionId,
           deserializer: (json) => SeaCreature.fromJson(

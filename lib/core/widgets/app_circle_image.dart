@@ -16,7 +16,7 @@ class AppCircleImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 40,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.secondary,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: imageData.isNotEmpty

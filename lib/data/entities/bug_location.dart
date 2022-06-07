@@ -1,5 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:flutter/widgets.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
+
 enum BugLocation {
   beach,
   beach_rocks,
@@ -25,50 +28,52 @@ enum BugLocation {
 }
 
 extension BugLocationExtension on BugLocation {
-  String toShortString() {
+  String toShortString(BuildContext context) {
+    final l10n = context.l10n;
+
     switch (this) {
       case BugLocation.beach:
-        return 'Plage';
+        return l10n.bug_location_beach;
       case BugLocation.beach_rocks:
-        return 'Plage (rochers)';
+        return l10n.bug_location_beach_rocks;
       case BugLocation.bushes_rocks_rain:
-        return 'Buissons/Rochers (pluie)';
+        return l10n.bug_location_bushes_rocks_rain;
       case BugLocation.flowers:
-        return 'Fleurs';
+        return l10n.bug_location_flowers;
       case BugLocation.ground:
-        return 'Sol';
+        return l10n.bug_location_ground;
       case BugLocation.lights:
-        return 'Lumières';
+        return l10n.bug_location_lights;
       case BugLocation.near_water:
-        return 'Près de l\'eau';
+        return l10n.bug_location_near_water;
       case BugLocation.palms:
-        return 'Palmiers';
+        return l10n.bug_location_palms;
       case BugLocation.rocks:
-        return 'Rockers';
+        return l10n.bug_location_rocks;
       case BugLocation.rotten_turnips:
-        return 'Navets pourris';
+        return l10n.bug_location_rotten_turnips;
       case BugLocation.sky:
-        return 'Ciel';
+        return l10n.bug_location_sky;
       case BugLocation.sky_black_purple_blue_flowers:
-        return 'Ciel (fleurs hybrides noires, violettes et bleues)';
+        return l10n.bug_location_sky_black_purple_blue_flowers;
       case BugLocation.snowballs:
-        return 'Boules de neige';
+        return l10n.bug_location_snowballs;
       case BugLocation.trash_rotten_turnips:
-        return 'Déchets/Navets pourris';
+        return l10n.bug_location_trash_rotten_turnips;
       case BugLocation.tree_stumps:
-        return 'Souches d\'arbres';
+        return l10n.bug_location_tree_stumps;
       case BugLocation.trees:
-        return 'Arbres';
+        return l10n.bug_location_trees;
       case BugLocation.trees_palms:
-        return 'Arbres et palmiers';
+        return l10n.bug_location_trees_palms;
       case BugLocation.underground:
-        return 'Sous la terre';
+        return l10n.bug_location_underground;
       case BugLocation.villagers:
-        return 'Villageois';
+        return l10n.bug_location_villagers;
       case BugLocation.water_surface:
-        return 'Surface de l\'eau';
+        return l10n.bug_location_water_surface;
       case BugLocation.white_flowers:
-        return 'Fleurs blanches';
+        return l10n.bug_location_white_flowers;
     }
   }
 }

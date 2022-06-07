@@ -1,9 +1,10 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:new_horizons_encyclopedia/core/config/config.dart';
+import 'package:new_horizons_encyclopedia/l10n/localizations.dart';
 import 'package:new_horizons_encyclopedia/modules/app/app_providers.dart';
-import 'package:new_horizons_encyclopedia/modules/home/view.dart';
+import 'package:new_horizons_encyclopedia/modules/splash/view.dart';
+import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -18,11 +19,27 @@ class App extends StatelessWidget {
     return AppProviders(
       config: config,
       child: MaterialApp(
-        builder: DevicePreview.appBuilder, // TODO: remove this after debug
-        locale: DevicePreview.locale(context), // TODO: remove this after debug
-        useInheritedMediaQuery: true, // TODO: remove this after debug
+        theme: ThemeData(
+          primaryColor: AppColors.primary,
+          colorScheme: const ColorScheme(
+            primary: AppColors.primary,
+            primaryVariant: AppColors.primary,
+            secondary: AppColors.secondary,
+            secondaryVariant: AppColors.secondary,
+            surface: AppColors.surface,
+            background: AppColors.shadow,
+            error: AppColors.red,
+            onPrimary: AppColors.text,
+            onSecondary: AppColors.text,
+            onSurface: AppColors.text,
+            onBackground: AppColors.text,
+            onError: AppColors.text,
+            brightness: Brightness.light,
+          ),
+        ),
         title: 'New Horizons Encyclopedia',
         localizationsDelegates: const [
+          AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
@@ -31,7 +48,7 @@ class App extends StatelessWidget {
           Locale('fr', ''),
           Locale('en', ''),
         ],
-        home: const HomeView(),
+        home: const SplashView(),
       ),
     );
   }

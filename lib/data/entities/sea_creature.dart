@@ -13,7 +13,7 @@ class SeaCreature with _$SeaCreature {
     required String name,
     required String hour,
     required String month,
-    required String price,
+    required int price,
     required FishSize size,
     required Movement movement,
     required Rarity rarity,

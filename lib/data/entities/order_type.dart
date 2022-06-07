@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
+
 enum OrderType {
   id,
   name,
@@ -6,16 +9,18 @@ enum OrderType {
 }
 
 extension OrderTypeExtension on OrderType {
-  String toShortString() {
+  String toShortString(BuildContext context) {
+    final l10n = context.l10n;
+
     switch (this) {
       case OrderType.id:
-        return 'ID';
+        return l10n.order_type_id;
       case OrderType.name:
-        return 'Nom';
+        return l10n.order_type_name;
       case OrderType.price:
-        return 'Prix';
+        return l10n.order_type_price;
       case OrderType.rarity:
-        return 'Rareté';
+        return l10n.order_type_rarity;
     }
   }
 
@@ -39,12 +44,14 @@ enum OrderSort {
 }
 
 extension OrderSortExtension on OrderSort {
-  String toShortString() {
+  String toShortString(BuildContext context) {
+    final l10n = context.l10n;
+
     switch (this) {
       case OrderSort.asc:
-        return 'Croissant';
+        return l10n.order_sort_asc;
       case OrderSort.desc:
-        return 'Décroissant';
+        return l10n.order_sort_desc;
     }
   }
 

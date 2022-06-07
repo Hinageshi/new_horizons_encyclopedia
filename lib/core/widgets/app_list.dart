@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 import 'package:new_horizons_encyclopedia/theme/app_text_styles.dart';
 
@@ -19,6 +20,8 @@ class AppList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return data.isNotEmpty &&
             imagesData.isNotEmpty &&
             data.length == imagesData.length
@@ -36,10 +39,10 @@ class AppList extends StatelessWidget {
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(32),
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
                   child: Text(
-                    'Les données n\'ont pas pu être récupérées.',
+                    l10n.error_no_data_found,
                     style: AppTextStyles.cardTitle,
                     textAlign: TextAlign.center,
                   ),

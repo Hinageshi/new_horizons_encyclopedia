@@ -8,7 +8,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  appwrite: ^2.0.3
+  appwrite: ^3.0.1
   device_preview: ^1.0.0-alpha.15 # Remove after debug
   flutter:
     sdk: flutter
@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^0.15.0 # TODO: Set to 1.0.0 after DevicePreview removal
   gap: ^2.0.0
+  intl: ^0.17.0
   json_annotation: ^4.3.0
   quiver: ^3.0.1+1
   provider: ^6.0.1
@@ -32,14 +33,19 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/background.jpg
+    - assets/images/background_blue.jpg
+    - assets/images/background_green.jpg
+    - assets/images/background_yellow.jpg
     - assets/images/bell.png
+    - assets/images/bug.png
     - assets/images/chrono.png
     - assets/images/critterpedia.png
     - assets/images/error.png
+    - assets/images/fish.png
     - assets/images/fishing_rod.png
     - assets/images/net.png
     - assets/images/ruler.png
+    - assets/images/sea_creature.png
     - assets/images/seashell.png
   fonts:
     - family: FOT-Seurat-Pro

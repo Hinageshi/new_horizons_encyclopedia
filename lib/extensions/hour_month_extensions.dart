@@ -1,7 +1,12 @@
+import 'package:flutter/widgets.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
+
 extension HourExtension on String {
-  String toReadableHour() {
+  String toReadableHour(BuildContext context) {
+    final l10n = context.l10n;
+
     if (this == '0-23') {
-      return 'Toute la journée';
+      return l10n.hour_all_day;
     } else {
       return '${replaceAll('-', 'h - ').replaceAll(';', ', ')}h';
     }
@@ -9,24 +14,26 @@ extension HourExtension on String {
 }
 
 extension MonthExtension on String {
-  String toReadableMonth() {
+  String toReadableMonth(BuildContext context) {
+    final l10n = context.l10n;
+
     if (this == '1-12') {
-      return 'Toute l\'année';
+      return l10n.month_all_year;
     } else {
       final replaced = replaceAll('-', ' - ')
           .replaceAll(';', ', ')
-          .replaceAll('10', 'Octobre')
-          .replaceAll('11', 'Novembre')
-          .replaceAll('12', 'Décembre')
-          .replaceAll('1', 'Janvier')
-          .replaceAll('2', 'Février')
-          .replaceAll('3', 'Mars')
-          .replaceAll('4', 'Avril')
-          .replaceAll('5', 'Mai')
-          .replaceAll('6', 'Juin')
-          .replaceAll('7', 'Juillet')
-          .replaceAll('8', 'Août')
-          .replaceAll('9', 'Septembre');
+          .replaceAll('10', l10n.month_october)
+          .replaceAll('11', l10n.month_november)
+          .replaceAll('12', l10n.month_december)
+          .replaceAll('1', l10n.month_january)
+          .replaceAll('2', l10n.month_february)
+          .replaceAll('3', l10n.month_march)
+          .replaceAll('4', l10n.month_april)
+          .replaceAll('5', l10n.month_may)
+          .replaceAll('6', l10n.month_june)
+          .replaceAll('7', l10n.month_july)
+          .replaceAll('8', l10n.month_august)
+          .replaceAll('9', l10n.month_september);
       return replaced;
     }
   }

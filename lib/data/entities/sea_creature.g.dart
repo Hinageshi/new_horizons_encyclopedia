@@ -12,7 +12,7 @@ _$_SeaCreature _$$_SeaCreatureFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       hour: json['hour'] as String,
       month: json['month'] as String,
-      price: json['price'] as String,
+      price: json['price'] as int,
       size: $enumDecode(_$FishSizeEnumMap, json['size']),
       movement: $enumDecode(_$MovementEnumMap, json['movement']),
       rarity: $enumDecode(_$RarityEnumMap, json['rarity']),

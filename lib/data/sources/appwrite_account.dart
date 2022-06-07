@@ -34,6 +34,8 @@ class AppwriteAccount {
     String? name,
   }) async =>
       _account.create(
+        userId: 'unique()',
+        // userId: '',
         email: email,
         password: password,
         name: name,
@@ -46,6 +48,17 @@ class AppwriteAccount {
       _account.createSession(
         email: email,
         password: password,
+      );
+
+  Future<void> logOut({
+    required String sessionId,
+  }) async =>
+      _account.deleteSession(
+        sessionId: sessionId,
+      );
+
+  Future<Session> getCurrentSession() async => _account.getSession(
+        sessionId: 'current',
       );
 
   Future<User> getCurrentUser() async => _account.get();

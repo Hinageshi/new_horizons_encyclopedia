@@ -13,7 +13,7 @@ class Fish with _$Fish {
     required String name,
     required String hour,
     required String month,
-    required String price,
+    required int price,
     required FishLocation location,
     required FishSize size,
     required Rarity rarity,

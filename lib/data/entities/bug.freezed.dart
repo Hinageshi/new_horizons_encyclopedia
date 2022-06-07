@@ -26,7 +26,7 @@ class _$BugTearOff {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required BugLocation location,
       required Rarity rarity,
       required String imageId}) {
@@ -56,7 +56,7 @@ mixin _$Bug {
   String get name => throw _privateConstructorUsedError;
   String get hour => throw _privateConstructorUsedError;
   String get month => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
   BugLocation get location => throw _privateConstructorUsedError;
   Rarity get rarity => throw _privateConstructorUsedError;
   String get imageId => throw _privateConstructorUsedError;
@@ -75,7 +75,7 @@ abstract class $BugCopyWith<$Res> {
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       BugLocation location,
       Rarity rarity,
       String imageId});
@@ -120,7 +120,7 @@ class _$BugCopyWithImpl<$Res> implements $BugCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ abstract class _$BugCopyWith<$Res> implements $BugCopyWith<$Res> {
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       BugLocation location,
       Rarity rarity,
       String imageId});
@@ -193,7 +193,7 @@ class __$BugCopyWithImpl<$Res> extends _$BugCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -235,7 +235,7 @@ class _$_Bug extends _Bug {
   @override
   final String month;
   @override
-  final String price;
+  final int price;
   @override
   final BugLocation location;
   @override
@@ -285,7 +285,7 @@ abstract class _Bug extends Bug {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required BugLocation location,
       required Rarity rarity,
       required String imageId}) = _$_Bug;
@@ -302,7 +302,7 @@ abstract class _Bug extends Bug {
   @override
   String get month;
   @override
-  String get price;
+  int get price;
   @override
   BugLocation get location;
   @override

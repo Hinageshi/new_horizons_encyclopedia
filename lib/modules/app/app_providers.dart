@@ -7,6 +7,7 @@ import 'package:new_horizons_encyclopedia/data/sources/appwrite_account.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_client.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_database.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
+import 'package:new_horizons_encyclopedia/notifiers/current_user.dart';
 import 'package:provider/provider.dart';
 
 class AppProviders extends StatelessWidget {
@@ -75,6 +76,9 @@ class AppProviders extends StatelessWidget {
             database: context.watch<AppwriteDatabase>(),
             old: old,
           ),
+        ),
+        ChangeNotifierProvider<CurrentUserNotifier>(
+          create: (_) => CurrentUserNotifier(),
         ),
       ],
       child: child,

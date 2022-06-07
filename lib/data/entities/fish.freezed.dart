@@ -26,7 +26,7 @@ class _$FishTearOff {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required FishLocation location,
       required FishSize size,
       required Rarity rarity,
@@ -58,7 +58,7 @@ mixin _$Fish {
   String get name => throw _privateConstructorUsedError;
   String get hour => throw _privateConstructorUsedError;
   String get month => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
   FishLocation get location => throw _privateConstructorUsedError;
   FishSize get size => throw _privateConstructorUsedError;
   Rarity get rarity => throw _privateConstructorUsedError;
@@ -78,7 +78,7 @@ abstract class $FishCopyWith<$Res> {
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       FishLocation location,
       FishSize size,
       Rarity rarity,
@@ -125,7 +125,7 @@ class _$FishCopyWithImpl<$Res> implements $FishCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ abstract class _$FishCopyWith<$Res> implements $FishCopyWith<$Res> {
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       FishLocation location,
       FishSize size,
       Rarity rarity,
@@ -204,7 +204,7 @@ class __$FishCopyWithImpl<$Res> extends _$FishCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -251,7 +251,7 @@ class _$_Fish extends _Fish {
   @override
   final String month;
   @override
-  final String price;
+  final int price;
   @override
   final FishLocation location;
   @override
@@ -304,7 +304,7 @@ abstract class _Fish extends Fish {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required FishLocation location,
       required FishSize size,
       required Rarity rarity,
@@ -322,7 +322,7 @@ abstract class _Fish extends Fish {
   @override
   String get month;
   @override
-  String get price;
+  int get price;
   @override
   FishLocation get location;
   @override

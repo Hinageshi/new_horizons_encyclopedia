@@ -11,7 +11,7 @@ _$_Fish _$$_FishFromJson(Map<String, dynamic> json) => _$_Fish(
       name: json['name'] as String,
       hour: json['hour'] as String,
       month: json['month'] as String,
-      price: json['price'] as String,
+      price: json['price'] as int,
       location: $enumDecode(_$FishLocationEnumMap, json['location']),
       size: $enumDecode(_$FishSizeEnumMap, json['size']),
       rarity: $enumDecode(_$RarityEnumMap, json['rarity']),

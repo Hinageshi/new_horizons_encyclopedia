@@ -5,8 +5,8 @@ class PrpConfig extends Config {
   const PrpConfig() : super();
 
   @override
-  String get appWriteEndpoint => 'http://localhost:4003/v1';
+  String get appWriteEndpoint => 'http://localhost:80/v1';
 
   @override
-  String get projectId => '6192cad3623bd';
+  String get projectId => '61d9f595ae3ce91e7118';
 }

@@ -9,7 +9,7 @@ class AppPriceLine extends StatelessWidget {
     required this.price,
   }) : super(key: key);
 
-  final String price;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AppPriceLine extends StatelessWidget {
         ),
         const Gap(12),
         Text(
-          price,
+          price.toString(),
           style: AppTextStyles.cardBody,
         ),
       ],

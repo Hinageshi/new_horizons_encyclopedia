@@ -6,6 +6,7 @@ import 'package:new_horizons_encyclopedia/core/widgets/app_card.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_circle_image.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_list.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_price_line.dart';
+import 'package:new_horizons_encyclopedia/core/widgets/app_tile.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_time_line.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/app_top_bar.dart';
 import 'package:new_horizons_encyclopedia/core/widgets/notifier_loader.dart';
@@ -13,8 +14,11 @@ import 'package:new_horizons_encyclopedia/core/widgets/observers/busy_observer.d
 import 'package:new_horizons_encyclopedia/core/widgets/observers/error_observer.dart';
 import 'package:new_horizons_encyclopedia/data/entities/bug.dart';
 import 'package:new_horizons_encyclopedia/data/entities/bug_location.dart';
+import 'package:new_horizons_encyclopedia/data/entities/rarity.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/bugs.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
+import 'package:new_horizons_encyclopedia/extensions/hour_month_extensions.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
 import 'package:new_horizons_encyclopedia/modules/bugs/notifier.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 import 'package:new_horizons_encyclopedia/theme/app_images.dart';
@@ -53,6 +57,7 @@ class _InternalBugsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final notifier = context.watch<BugsNotifier>();
 
     return Stack(
@@ -60,21 +65,23 @@ class _InternalBugsView extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AppImages.background),
+              image: AssetImage(AppImages.backgroundGreen),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        Column(
-          children: [
-            AppTopBar(
-              title: 'Insectes',
-              onTap: () => notifier.pushFiltersViewAndReload(context),
-            ),
-            const Expanded(
-              child: _BugsList(),
-            ),
-          ],
+        SafeArea(
+          child: Column(
+            children: [
+              AppTopBar(
+                title: l10n.common_bugs,
+                onTap: () => notifier.pushFiltersViewAndReload(context),
+              ),
+              const Expanded(
+                child: _BugsList(),
+              ),
+            ],
+          ),
         )
       ],
     );
@@ -120,6 +127,8 @@ class _BugCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: AppCard(
@@ -138,15 +147,34 @@ class _BugCard extends StatelessWidget {
                       const Gap(12),
                       Text(
                         bug.name,
-                        style: AppTextStyles.cardTitle,
+                        style: AppTextStyles.cardTitle.copyWith(height: 1.5),
                         textAlign: TextAlign.center,
                       ),
+                      if (bug.rarity != Rarity.normal) ...[
+                        const Gap(6),
+                        AppTile(
+                          color: bug.rarity == Rarity.rare
+                              ? AppColors.yellow
+                              : AppColors.orange,
+                          text: bug.rarity.toShortString(context),
+                        ),
+                      ],
+                      if (bug.month.isSameFirstMonth())
+                        AppTile(
+                          color: AppColors.green,
+                          text: l10n.tile_new_month,
+                        ),
+                      if (bug.month.isSameLastMonth())
+                        AppTile(
+                          color: AppColors.red,
+                          text: l10n.tile_last_month,
+                        ),
                     ],
                   ),
                 ),
-                const VerticalDivider(
+                VerticalDivider(
                   width: 24,
-                  color: AppColors.text,
+                  color: AppColors.text.withOpacity(0.3),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +217,7 @@ class _BugLocationLine extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
           child: Text(
-            location.toShortString(),
+            location.toShortString(context),
             style: AppTextStyles.cardBody,
           ),
         ),

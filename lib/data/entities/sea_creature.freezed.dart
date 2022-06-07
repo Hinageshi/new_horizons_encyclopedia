@@ -26,7 +26,7 @@ class _$SeaCreatureTearOff {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required FishSize size,
       required Movement movement,
       required Rarity rarity,
@@ -58,7 +58,7 @@ mixin _$SeaCreature {
   String get name => throw _privateConstructorUsedError;
   String get hour => throw _privateConstructorUsedError;
   String get month => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
   FishSize get size => throw _privateConstructorUsedError;
   Movement get movement => throw _privateConstructorUsedError;
   Rarity get rarity => throw _privateConstructorUsedError;
@@ -80,7 +80,7 @@ abstract class $SeaCreatureCopyWith<$Res> {
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       FishSize size,
       Movement movement,
       Rarity rarity,
@@ -127,7 +127,7 @@ class _$SeaCreatureCopyWithImpl<$Res> implements $SeaCreatureCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       size: size == freezed
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ abstract class _$SeaCreatureCopyWith<$Res>
       String name,
       String hour,
       String month,
-      String price,
+      int price,
       FishSize size,
       Movement movement,
       Rarity rarity,
@@ -209,7 +209,7 @@ class __$SeaCreatureCopyWithImpl<$Res> extends _$SeaCreatureCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       size: size == freezed
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
@@ -257,7 +257,7 @@ class _$_SeaCreature extends _SeaCreature {
   @override
   final String month;
   @override
-  final String price;
+  final int price;
   @override
   final FishSize size;
   @override
@@ -310,7 +310,7 @@ abstract class _SeaCreature extends SeaCreature {
       required String name,
       required String hour,
       required String month,
-      required String price,
+      required int price,
       required FishSize size,
       required Movement movement,
       required Rarity rarity,
@@ -329,7 +329,7 @@ abstract class _SeaCreature extends SeaCreature {
   @override
   String get month;
   @override
-  String get price;
+  int get price;
   @override
   FishSize get size;
   @override

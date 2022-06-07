@@ -19,6 +19,7 @@ import 'package:new_horizons_encyclopedia/data/entities/rarity.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/fish.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
 import 'package:new_horizons_encyclopedia/extensions/hour_month_extensions.dart';
+import 'package:new_horizons_encyclopedia/l10n/l10n.dart';
 import 'package:new_horizons_encyclopedia/modules/fish/notifier.dart';
 import 'package:new_horizons_encyclopedia/theme/app_colors.dart';
 import 'package:new_horizons_encyclopedia/theme/app_images.dart';
@@ -34,7 +35,7 @@ class FishView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProxyProvider0<FishNotifier>(
       create: (_) => FishNotifier(),
-      update: (context, notifier) => notifier!
+      update: (context, old) => old!
         ..fishRepository = context.watch<FishRepository>()
         ..storage = context.watch<AppwriteStorage>(),
       child: const Scaffold(
@@ -57,6 +58,7 @@ class _InternalFishView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final notifier = context.watch<FishNotifier>();
 
     return Stack(
@@ -64,17 +66,16 @@ class _InternalFishView extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AppImages.background),
+              image: AssetImage(AppImages.backgroundBlue),
               fit: BoxFit.cover,
             ),
           ),
         ),
         SafeArea(
-          bottom: false,
           child: Column(
             children: [
               AppTopBar(
-                title: 'Poissons',
+                title: l10n.common_fish,
                 onTap: () => notifier.pushFiltersViewAndReload(context),
               ),
               const Expanded(
@@ -127,6 +128,8 @@ class _FishCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: AppCard(
@@ -145,32 +148,34 @@ class _FishCard extends StatelessWidget {
                       const Gap(12),
                       Text(
                         fish.name,
-                        style: AppTextStyles.cardTitle,
+                        style: AppTextStyles.cardTitle.copyWith(height: 1.5),
                         textAlign: TextAlign.center,
                       ),
-                      if (fish.rarity != Rarity.normal)
+                      if (fish.rarity != Rarity.normal) ...[
+                        const Gap(6),
                         AppTile(
                           color: fish.rarity == Rarity.rare
                               ? AppColors.yellow
                               : AppColors.orange,
-                          text: fish.rarity.toShortString(),
+                          text: fish.rarity.toShortString(context),
                         ),
+                      ],
                       if (fish.month.isSameFirstMonth())
-                        const AppTile(
+                        AppTile(
                           color: AppColors.green,
-                          text: 'Nouveau ce mois',
+                          text: l10n.tile_new_month,
                         ),
                       if (fish.month.isSameLastMonth())
-                        const AppTile(
+                        AppTile(
                           color: AppColors.red,
-                          text: 'Dernier mois',
+                          text: l10n.tile_last_month,
                         ),
                     ],
                   ),
                 ),
-                const VerticalDivider(
+                VerticalDivider(
                   width: 24,
-                  color: AppColors.text,
+                  color: AppColors.text.withOpacity(0.3),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,7 +219,7 @@ class _FishLocationLine extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
           child: Text(
-            location.toShortString(),
+            location.toShortString(context),
             style: AppTextStyles.cardBody,
           ),
         ),
@@ -241,7 +246,7 @@ class _FishSizeLine extends StatelessWidget {
         ),
         const Gap(12),
         Text(
-          size.toShortString(),
+          size.toShortString(context),
           style: AppTextStyles.cardBody,
         )
       ],

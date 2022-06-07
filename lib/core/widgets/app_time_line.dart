@@ -29,11 +29,11 @@ class AppTimeLine extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                month.toReadableMonth(),
+                month.toReadableMonth(context),
                 style: AppTextStyles.cardBody,
               ),
               Text(
-                hour.toReadableHour(),
+                hour.toReadableHour(context),
                 style: AppTextStyles.cardBody,
               ),
             ],

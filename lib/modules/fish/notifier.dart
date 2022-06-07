@@ -15,6 +15,7 @@ import 'package:new_horizons_encyclopedia/data/entities/order_type.dart';
 import 'package:new_horizons_encyclopedia/data/repositories/fish.dart';
 import 'package:new_horizons_encyclopedia/data/sources/appwrite_storage.dart';
 import 'package:new_horizons_encyclopedia/modules/filters/view.dart';
+import 'package:new_horizons_encyclopedia/theme/app_images.dart';
 
 class FishNotifier extends SafeChangeNotifier
     with BusyNotifier, ErrorNotifier, LoadableNotifier {
@@ -52,7 +53,7 @@ class FishNotifier extends SafeChangeNotifier
     orderType: OrderType.id,
     orderSort: OrderSort.asc,
     orderCast: OrderCast.string,
-    filterTime: FilterTime.all,
+    filterTime: FilterTime.currently,
     month: null,
     filterRarity: FilterRarity.all,
   );
@@ -63,6 +64,7 @@ class FishNotifier extends SafeChangeNotifier
       FadeRouteBuilder(
         page: FiltersView(
           databaseFilters: _databaseFilters,
+          backgroundPath: AppImages.backgroundBlue,
         ),
       ),
     );
@@ -94,7 +96,7 @@ class FishNotifier extends SafeChangeNotifier
             if ((e1.length == 1 || e1.length == 2) &&
                 int.parse(e1) == targetMonth) {
               monthOk = false;
-            } else {
+            } else if (e1.length > 2) {
               int monthStart = int.parse(e1.split('-')[0]);
               int monthEnd = int.parse(e1.split('-')[1]);
               if (monthStart > monthEnd) {
